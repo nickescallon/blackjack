@@ -3,8 +3,11 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
+    @busted =  false
 
-  hit: -> @add(@deck.pop()).last()
+  hit: -> if (!@busted) then @add(@deck.pop()).last() 
+
+  stand: -> console.log "stand #{@}"
 
   scores: ->
     # The scores are an array of potential scores.
@@ -16,4 +19,7 @@ class window.Hand extends Backbone.Collection
     score = @reduce (score, card) ->
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
+    if [score][0] > 21
+      @busted = true
+      @trigger('bust', @)
     if hasAce then [score, score + 10] else [score]
