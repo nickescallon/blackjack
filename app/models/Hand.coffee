@@ -13,7 +13,13 @@ class window.Hand extends Backbone.Collection
     @trigger('stand', @) 
     @standed = true
 
-  reveal: -> @.at(0).flip()
+  reveal: -> 
+    if (@isDealer)
+      @.at(0).flip()
+
+  play: ->
+    if (@isDealer)
+      console.log 'Dealer dealing '
 
   scores: ->
     # The scores are an array of potential scores.
