@@ -3,11 +3,17 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
-    @busted =  false
+    @busted  = false
+    @standed  = false
+    @
 
-  hit: -> if (!@busted) then @add(@deck.pop()).last() 
+  hit: -> if (!@busted && !@standed) then @add(@deck.pop()).last()
 
-  stand: -> console.log "stand #{@}"
+  stand: -> 
+    @trigger('stand', @) 
+    @standed = true
+
+  reveal: -> @.at(0).flip()
 
   scores: ->
     # The scores are an array of potential scores.
