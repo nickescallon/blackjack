@@ -18,3 +18,17 @@ img.covered {
 .hand {
   overflow: auto;
 }
+
+.container {
+  margin: auto;
+  background-color: green;
+  width: 500px;
+}
+
+.announce-outcome {
+  float: right;
+  width: 50px;
+  height: 30px;
+  margin-right: 50px;
+  background-color: 
+}
