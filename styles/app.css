@@ -5,9 +5,10 @@
   border-radius: 5px;
   height: 167px;
   margin-right: 20px;
+  margin-bottom: 10px;
 }
 
-img.covered {
+.covered {
   content:url('./cards/card-back.png');
 }
 
@@ -16,15 +17,18 @@ img.covered {
   height: 50px;
 }
 
-.card {
-  margin-bottom: 10px;
-}
 button {
   margin-top: 20px;
 }
-button.hit-button {
+
+.disable-button {
+  display: none;
+}
+
+.hit-button {
   margin-left: 40px;
 }
+
 .hand {
   overflow: auto;
   margin : auto;

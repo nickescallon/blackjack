@@ -1,11 +1,15 @@
 class window.Judge extends Backbone.Model
 
   initialize: ->
+    @reset()
+    @
+
+  reset: ->
     @set
       scoreMessage: 'Play!'
       emoticon: 'styles/wondering.jpeg'
     @
-
+    
   updateScore: (params) ->
     playerScore = params.playerScore
     dealerScore = params.dealerScore

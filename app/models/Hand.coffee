@@ -19,13 +19,17 @@ class window.Hand extends Backbone.Collection
       @.at(0).flip()
 
   play: ->
-    while @scores()[0] < 17 && (!@scores()[1]? || (@scores()[1] < 18 || @scores()[1] >21)) 
-      @hit()
-      if (@scores()[0] > 21)
-        @trigger('bust', @)
-    @trigger('done', @)
-    @standed = true
-    console.log @scores()
+    if @scores()[0] < 17 && (!@scores()[1]? || (@scores()[1] < 18 || @scores()[1] >21))
+      setTimeout( ( () =>
+          @hit()
+          if (@scores()[0] > 21)
+            @trigger('bust', @)
+          @play() ) ,
+        1500)
+    else
+      @trigger('done', @)
+      @standed = true
+    console.log @getScores()
 
   scores: ->
     # The scores are an array of potential scores.
