@@ -2,7 +2,7 @@ class window.JudgeView extends Backbone.View
 
   className: 'judge'
 
-  template: _.template '<div class="announce-outcome"><%= scoreMessage %></div>'
+  template: _.template '<img src=<%= emoticon %>><%= scoreMessage %>'
 
   initialize: ->
     @model.on 'change', => @render()
@@ -10,5 +10,6 @@ class window.JudgeView extends Backbone.View
 
   render: ->
     @$el.children().detach()
+    #@$el.attr('src', @.model.get 'emoticon')
     console.log(@model)
     @$el.html(@template(@model.attributes))

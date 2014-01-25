@@ -18,11 +18,23 @@ class window.AppView extends Backbone.View
     @model.get('playerHand').on('bust',
       ()=>
         @model.get('dealerHand').reveal()
-        console.log('busted') )
+        @model.get('judge').updateScore(
+          playerScore: @model.get('playerHand').getScores()
+          dealerScore: @model.get('dealerHand').getScores() 
+          )
+      )
     @model.get('playerHand').on('stand',
       ()=> 
         @model.get('dealerHand').reveal()
-        @model.get('dealerHand').play() )
+        @model.get('dealerHand').play() 
+      )
+    @model.get('dealerHand').on('bust done',
+      ()=> @model.get('judge').updateScore(
+             playerScore: @model.get('playerHand').getScores()
+             dealerScore: @model.get('dealerHand').getScores() 
+             )
+      )
+
     @render()
 
   render: ->

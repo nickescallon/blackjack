@@ -7,16 +7,27 @@
   margin-right: 20px;
 }
 
-.covered {
-  background-color: black;
-}
-
 img.covered {
   content:url('./cards/card-back.png');
 }
 
+.judge img {
+  width: 50px;
+  height: 50px;
+}
+
+.card {
+  margin-bottom: 10px;
+}
+button {
+  margin-top: 20px;
+}
+button.hit-button {
+  margin-left: 40px;
+}
 .hand {
   overflow: auto;
+  margin : auto;
 }
 
 .container {
@@ -25,7 +36,12 @@ img.covered {
   width: 500px;
 }
 
-.announce-outcome {
+.player-hand-container, .dealer-hand-container {
+  padding-bottom: 10px;
+  margin-left: 40px;
+}
+
+.judge {
   float: right;
   width: 50px;
   height: 30px;

@@ -10,7 +10,7 @@ class window.Hand extends Backbone.Collection
   hit: -> if (!@busted && !@standed) then @add(@deck.pop()).last()
 
   stand: ->
-    if (!@standed)
+    if (!@standed && !@isDealer)
       @trigger('stand', @) 
       @standed = true
 
@@ -22,8 +22,9 @@ class window.Hand extends Backbone.Collection
     while @scores()[0] < 17 && (!@scores()[1]? || (@scores()[1] < 18 || @scores()[1] >21)) 
       @hit()
       if (@scores()[0] > 21)
-        @trigger('busted', @)
+        @trigger('bust', @)
     @trigger('done', @)
+    @standed = true
     console.log @scores()
 
   scores: ->
@@ -36,7 +37,11 @@ class window.Hand extends Backbone.Collection
     score = @reduce (score, card) ->
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
+    if hasAce then @score = [score, score + 10] else @score = [score]
     if [score][0] > 21
       @busted = true
       @trigger('bust', @)
-    if hasAce then [score, score + 10] else [score]
+    @score
+    
+  getScores: ->
+    @score
