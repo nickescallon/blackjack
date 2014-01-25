@@ -9,17 +9,22 @@ class window.Hand extends Backbone.Collection
 
   hit: -> if (!@busted && !@standed) then @add(@deck.pop()).last()
 
-  stand: -> 
-    @trigger('stand', @) 
-    @standed = true
+  stand: ->
+    if (!@standed)
+      @trigger('stand', @) 
+      @standed = true
 
   reveal: -> 
     if (@isDealer)
       @.at(0).flip()
 
   play: ->
-    if (@isDealer)
-      console.log 'Dealer dealing '
+    while @scores()[0] < 17 && (!@scores()[1]? || (@scores()[1] < 18 || @scores()[1] >21)) 
+      @hit()
+      if (@scores()[0] > 21)
+        @trigger('busted', @)
+    @trigger('done', @)
+    console.log @scores()
 
   scores: ->
     # The scores are an array of potential scores.
